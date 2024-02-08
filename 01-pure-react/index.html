@@ -15,6 +15,14 @@
         src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
         crossorigin
       ></script>
+      <script>
+        function app() {
+          return React.createElement("header", null, "hello react!");
+        }
+
+        const root = ReactDom.createRoot(document.getElementById("root"));
+        root.render(React.createElement(app));
+      </script>
     </dev>
   </body>
 </html>
