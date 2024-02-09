@@ -185,5 +185,14 @@ async function getTodos() {
   return data;
 }
 
+const arrowType = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+  return data;
+};
+
+arrowType();
+
 const arrayData = getTodos();
 console.log(arrayData);
