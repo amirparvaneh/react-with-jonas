@@ -147,3 +147,21 @@ const books = getBooks();
 
 const title = books.map((book) => book.title);
 console.log(title);
+
+const essentialBook = books.map((book) => ({
+  title: book.title,
+  genre: book.genres,
+}));
+
+console.log(essentialBook);
+
+const longBook = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+
+longBook;
+
+const adventureBook = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBook;
