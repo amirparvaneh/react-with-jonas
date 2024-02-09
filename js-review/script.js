@@ -142,3 +142,8 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+const books = getBooks();
+
+const title = books.map((book) => book.title);
+console.log(title);
