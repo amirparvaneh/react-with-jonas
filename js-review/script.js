@@ -173,3 +173,7 @@ pagesAllBooks;
 const sortedBookByPage = books.slice().sort((a, b) => b.pages - a.pages);
 
 sortedBookByPage;
+
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
