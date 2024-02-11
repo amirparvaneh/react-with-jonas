@@ -49,22 +49,39 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
-      <h1>Hello React</h1>
+    <div className="container">
+      <Header />
       <Menu />
+      <Footer />
     </div>
   );
 }
 
+const Header = () => {
+  const style = {};
+
+  return (
+    <header className="header">
+      <h1 style={style}>Fast React Pizza Co.</h1>
+    </header>
+  );
+};
+
 const Menu = () => {
+  const pizza = pizzaData;
+  const numPizzas = pizza.length;
+
   return (
     <main className="menu">
       <h2>our menu</h2>
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {pizzaData.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )}
     </main>
   );
 };
@@ -79,6 +96,24 @@ const Pizza = (props) => {
         <span>{props.pizzaObj.price}</span>
       </div>
     </li>
+  );
+};
+
+const Footer = () => {
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closedHour = 22;
+  const isOpen = hour >= openHour && hour <= closedHour;
+
+  return (
+    <footer className="footer">
+      {isOpen && (
+        <div>
+          <p>we are open until {closedHour}:00. the order button is below</p>
+          <button className="btn">Order</button>
+        </div>
+      )}
+    </footer>
   );
 };
 
