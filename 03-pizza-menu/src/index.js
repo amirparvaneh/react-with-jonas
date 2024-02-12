@@ -75,12 +75,14 @@ const Menu = () => {
     <main className="menu">
       <h2>our menu</h2>
 
-      {numPizzas > 0 && (
+      {numPizzas > 0 ? (
         <ul className="pizzas">
           {pizzaData.map((pizza) => (
             <Pizza pizzaObj={pizza} key={pizza.name} />
           ))}
         </ul>
+      ) : (
+        <p>we are working on menu!</p>
       )}
     </main>
   );
@@ -107,11 +109,16 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      {isOpen && (
+      {isOpen ? (
         <div>
           <p>we are open until {closedHour}:00. the order button is below</p>
           <button className="btn">Order</button>
         </div>
+      ) : (
+        <p>
+          we are happy to welcome you between {openHour}:00 until {closedHour}
+          :00{" "}
+        </p>
       )}
     </footer>
   );
