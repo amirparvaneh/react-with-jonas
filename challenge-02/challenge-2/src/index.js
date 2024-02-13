@@ -83,7 +83,7 @@ const Skill = ({ skill, color, level }) => {
       <span>{skill}</span>
       <span>
         {level === "beginner" && "✋"}
-        {level == "intermediate" && "👍"}
+        {level === "intermediate" && "👍"}
         {level === "advanced" && "💪"}
       </span>
     </div>
