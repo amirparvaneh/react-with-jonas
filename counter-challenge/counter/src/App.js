@@ -53,9 +53,11 @@ const Counter = () => {
         </span>
         <span>{`${date}`}</span>
       </p>
-      <div>
-        <button onClick={handleReset}>reset</button>
-      </div>
+      {(count !== 0 || step !== 1) && (
+        <div>
+          <button onClick={handleReset}>reset</button>
+        </div>
+      )}
     </div>
   );
 };
