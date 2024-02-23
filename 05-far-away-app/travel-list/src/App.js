@@ -22,7 +22,6 @@ const App = () => {
   };
 
   const handleToggelItem = (id) => {
-    debugger;
     setItems((items) =>
       items.map((item) =>
         item.id === id ? { ...item, packed: !item.packed } : item
@@ -39,7 +38,7 @@ const App = () => {
         onDeleteItem={handleDeleteItems}
         onToggleItem={handleToggelItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 };

@@ -15,6 +15,7 @@ const Form = ({ onAddItems }) => {
       packed: false,
       id: Date.now(),
     };
+
     onAddItems(newItem);
 
     console.log(newItem);
