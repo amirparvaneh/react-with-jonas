@@ -14,7 +14,7 @@ const TipCalculator = () => {
   const [percentage1, stePercentage1] = useState(0);
   const [percentage2, setPercentage2] = useState(0);
 
-  const tip = (bill * ((percentage1 + percentage2) / 2)) / 100;
+  const tip = bill * ((percentage1 + percentage2) / 2 / 100);
 
   const handleReset = () => {
     setBill("");
@@ -31,17 +31,26 @@ const TipCalculator = () => {
       <SelectPercentage percentage={percentage2} onSelect={setPercentage2}>
         How much your friend like the service?
       </SelectPercentage>
-      <OutPut tip={tip} onHandle={handleReset} />
-      <Reset />
+      {bill > 0 && (
+        <>
+          <OutPut bill={bill} tip={tip} />
+          <Reset onHandle={handleReset} />
+        </>
+      )}
     </div>
   );
 };
 
-const BillInput = () => {
+const BillInput = ({ bill, onSetBill }) => {
   return (
     <div>
       <label>How much was the bill? </label>
-      <input type="text" placeholder="Bill value" />
+      <input
+        type="text"
+        placeholder="Bill value"
+        value={bill}
+        onChange={(e) => onSetBill(Number(e.target.value))}
+      />
     </div>
   );
 };
@@ -63,17 +72,13 @@ const SelectPercentage = ({ percentage, onSelect, children }) => {
 const OutPut = ({ bill, tip }) => {
   return (
     <h3>
-      you pay ${bill + tip} (${bill} + ${tip})
+      you pay ${bill + tip} (${bill} + ${tip} tip)
     </h3>
   );
 };
 
 const Reset = ({ onHandle }) => {
-  return (
-    <div onClick={onHandle}>
-      <button>Reset</button>
-    </div>
-  );
+  return <button onClick={onHandle}>Reset</button>;
 };
 
 export default App;
