@@ -1,4 +1,5 @@
 import "./index.css";
+import { useState } from "react";
 
 const initialFriends = [
   {
@@ -22,12 +23,20 @@ const initialFriends = [
 ];
 
 const App = () => {
+  const [showAddFriend, setShowAddFriend] = useState(false);
+
+  const handleShowAddFriend = () => {
+    setShowAddFriend((show) => !show);
+  };
   return (
     <div className="app">
       <div className="sidebar">
         <FriendList />
-        <FriendAddForm />
-        <Button>Add Friend</Button>
+        {showAddFriend && <FriendAddForm />}
+
+        <Button onClick={handleShowAddFriend}>
+          {showAddFriend ? "Close" : "Add Friend"}
+        </Button>
       </div>
       <FormSplitBill />
     </div>
@@ -67,8 +76,12 @@ const Friend = ({ friend }) => {
   );
 };
 
-const Button = ({ children }) => {
-  return <button className="button">{children}</button>;
+const Button = ({ children, onClick }) => {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 const FriendAddForm = () => {
@@ -77,7 +90,7 @@ const FriendAddForm = () => {
       <label>👫 Friend name</label>
       <input type="text" />
 
-      <label>📸 image url </label>
+      <label>🪪 image url </label>
       <input type="text" />
 
       <Button>Add</Button>
@@ -90,13 +103,13 @@ const FormSplitBill = () => {
     <form className="form-split-bill">
       <h2> Split a bill with your friend</h2>
 
-      <label>Bill expense </label>
+      <label>💰 Bill expense </label>
       <input type="text" />
-      <label>your expense </label>
+      <label>👱‍♂️ your expense </label>
       <input type="text" />
-      <label>X's expense </label>
+      <label>🧑🏻‍🤝‍🧑🏻 X's expense </label>
       <input type="text" disabled />
-      <label>who is paying the bill</label>
+      <label>🤑 who is paying the bill</label>
       <select>
         <option value="user">You</option>
         <option value="friend">X</option>
