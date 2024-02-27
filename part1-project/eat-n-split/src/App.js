@@ -85,13 +85,47 @@ const Button = ({ children, onClick }) => {
 };
 
 const FriendAddForm = () => {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("https://i.pravatar.cc/48");
+
+  const handleSetName = () => {
+    setName();
+  };
+
+  const handleImage = () => {
+    setImage();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!name || !image) return;
+
+    const id = crypto.randomUUID;
+    const newFriend = {
+      id,
+      name,
+      image: `${image}?={id}`,
+    };
+
+    setName("");
+    setImage("https://i.pravatar.cc/48");
+  };
   return (
-    <form className="form-add-friend">
+    <form className="form-add-friend" onSubmit={handleSubmit}>
       <label>👫 Friend name</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => handleSetName(e.target.value)}
+      />
 
       <label>🪪 image url </label>
-      <input type="text" />
+      <input
+        type="text"
+        value={image}
+        onChange={(e) => handleImage(e.target.value)}
+      />
 
       <Button>Add</Button>
     </form>
