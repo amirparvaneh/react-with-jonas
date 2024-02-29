@@ -48,6 +48,7 @@ const App = () => {
           : friend
       )
     );
+    setSelectedFriend(null);
   };
   return (
     <div className="app">
