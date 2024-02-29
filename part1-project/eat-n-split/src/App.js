@@ -26,6 +26,7 @@ const App = () => {
   const [friends, setFriends] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
 
+  const [selectedFriend, onSelectedFriend] = useState(null);
   const handleShowAddFriend = () => {
     setShowAddFriend((show) => !show);
   };
@@ -35,32 +36,36 @@ const App = () => {
     setShowAddFriend(false);
   };
 
+  const handleSelectedFriend = (friend) => {
+    onSelectedFriend(friend);
+  };
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendList friends={friends} />
+        <FriendList friends={friends} onSelection={handleSelectedFriend} />
         {showAddFriend && <FriendAddForm onAddFriend={handleAddFriend} />}
 
         <Button onClick={handleShowAddFriend}>
           {showAddFriend ? "Close" : "Add Friend"}
         </Button>
       </div>
-      <FormSplitBill />
+
+      {selectedFriend && <FormSplitBill />}
     </div>
   );
 };
 
-const FriendList = ({ friends }) => {
+const FriendList = ({ friends, onSelection }) => {
   return (
     <ul>
       {friends.map((friend) => (
-        <Friend friend={friend} key={friend.id} />
+        <Friend friend={friend} onSelection={onSelection} key={friend.id} />
       ))}
     </ul>
   );
 };
 
-const Friend = ({ friend }) => {
+const Friend = ({ friend, onSelection }) => {
   return (
     <li>
       <img src={friend.image} alt={friend.name} />
@@ -77,7 +82,7 @@ const Friend = ({ friend }) => {
         </p>
       )}
       {friend.balance === 0 && <p>you and {friend.name} are even</p>}
-      <button className="button">Select</button>
+      <Button onClick={() => onSelection(friend)}>Select</Button>
     </li>
   );
 };
