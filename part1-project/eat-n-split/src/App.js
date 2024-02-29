@@ -1,4 +1,3 @@
-import "./index.css";
 import { useState } from "react";
 
 const initialFriends = [
@@ -26,7 +25,7 @@ const App = () => {
   const [friends, setFriends] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
 
-  const [selectedFriend, onSelectedFriend] = useState(null);
+  const [selectedFriend, setSelectedFriend] = useState(null);
   const handleShowAddFriend = () => {
     setShowAddFriend((show) => !show);
   };
@@ -37,12 +36,16 @@ const App = () => {
   };
 
   const handleSelectedFriend = (friend) => {
-    onSelectedFriend(friend);
+    setSelectedFriend(friend);
   };
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendList friends={friends} onSelection={handleSelectedFriend} />
+        <FriendList
+          friends={friends}
+          selectedFriend={selectedFriend}
+          onSelection={handleSelectedFriend}
+        />
         {showAddFriend && <FriendAddForm onAddFriend={handleAddFriend} />}
 
         <Button onClick={handleShowAddFriend}>
@@ -50,24 +53,31 @@ const App = () => {
         </Button>
       </div>
 
-      {selectedFriend && <FormSplitBill />}
+      {selectedFriend && <FormSplitBill selected={selectedFriend} />}
     </div>
   );
 };
 
-const FriendList = ({ friends, onSelection }) => {
+const FriendList = ({ friends, selectedFriend, onSelection }) => {
   return (
     <ul>
       {friends.map((friend) => (
-        <Friend friend={friend} onSelection={onSelection} key={friend.id} />
+        <Friend
+          friend={friend}
+          selectedFriend={selectedFriend}
+          onSelection={onSelection}
+          key={friend.id}
+        />
       ))}
     </ul>
   );
 };
 
-const Friend = ({ friend, onSelection }) => {
+const Friend = ({ friend, selectedFriend, onSelection }) => {
+  const isSelected = selectedFriend?.id === friend.id;
+
   return (
-    <li>
+    <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
 
@@ -146,21 +156,21 @@ const FriendAddForm = ({ onAddFriend }) => {
   );
 };
 
-const FormSplitBill = () => {
+const FormSplitBill = ({ selected }) => {
   return (
     <form className="form-split-bill">
-      <h2> Split a bill with your friend</h2>
+      <h2> Split a bill with {selected.name}</h2>
 
       <label>💰 Bill expense </label>
       <input type="text" />
       <label>👱‍♂️ your expense </label>
       <input type="text" />
-      <label>🧑🏻‍🤝‍🧑🏻 X's expense </label>
+      <label>🧑🏻‍🤝‍🧑🏻 {selected.name}'s expense </label>
       <input type="text" disabled />
       <label>🤑 who is paying the bill</label>
       <select>
         <option value="user">You</option>
-        <option value="friend">X</option>
+        <option value="friend">{selected.name}</option>
       </select>
 
       <Button>Split bill</Button>
