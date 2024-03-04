@@ -17,7 +17,8 @@ const textStyle = {
 };
 
 const StarRating = ({ maxRating = 5 }) => {
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
 
   const handleSetRate = (rate) => {
     setRating(rate);
@@ -26,11 +27,17 @@ const StarRating = ({ maxRating = 5 }) => {
     <div style={containerStyle}>
       <div style={starContainerStyle}>
         {Array.from({ length: 5 }, (_, i) => (
-          <Star onRate={() => handleSetRate(i + 1)} full={rating >= i + 1} />
+          <Star
+            key={i}
+            onRate={() => handleSetRate(i + 1)}
+            full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
+            onHoverIn={() => setTempRating(i + 1)}
+            onHoverOut={() => setTempRating(0)}
+          />
         ))}
       </div>
       <p style={textStyle}>
-        <span>{rating || ""}</span>
+        <span>{tempRating || rating || ""}</span>
       </p>
     </div>
   );
@@ -43,9 +50,15 @@ const starStyle = {
   cursor: "pointer",
 };
 
-const Star = ({ onRate, full }) => {
+const Star = ({ onRate, full, onHoverIn, onHoverOut }) => {
   return (
-    <span className="button" onClick={onRate} style={starStyle}>
+    <span
+      className="button"
+      onClick={onRate}
+      style={starStyle}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
