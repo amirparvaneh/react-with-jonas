@@ -8,7 +8,7 @@ const Test = () => {
   const [movieRating, setMovieRating] = useState(0);
   return (
     <div>
-      <StarRating maxRating={10} color="blue" onSetRating={setMovieRating} />
+      <StarRating color="blue" maxRating={10} onSetRating={setMovieRating} />
       <p>the movie was rated {movieRating}</p>
     </div>
   );
