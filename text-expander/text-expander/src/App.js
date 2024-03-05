@@ -44,7 +44,7 @@ function TextExpander({
   className,
   children,
 }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(expanded);
   const displayText = isExpanded
     ? children
     : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
