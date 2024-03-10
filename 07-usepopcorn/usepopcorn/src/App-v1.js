@@ -54,7 +54,7 @@ const average = (arr) =>
 const KEY = "8db107a9";
 
 export default function App() {
-  const [query, setQueries] = useState("");
+  const [query, setQueries] = useState("inception");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +62,11 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
 
   const handleSelectMovie = (id) => {
-    setSelectedId(id);
+    setSelectedId((selectedId) => (selectedId === id ? null : id));
+  };
+
+  const handleCloseMovie = () => {
+    setSelectedId(null);
   };
   useEffect(() => {
     const fetchMovies = async () => {
@@ -114,7 +118,7 @@ export default function App() {
         </Box>
         <Box>
           {selectedId ? (
-            <MovieDetails selectedId={selectedId} />
+            <MovieDetails selectedId={selectedId} onClose={handleCloseMovie} />
           ) : (
             <>
               <WatchedSummary watched={watched} />
@@ -127,8 +131,15 @@ export default function App() {
   );
 }
 
-const MovieDetails = ({ selectedId }) => {
-  return <div className="details">{selectedId}</div>;
+const MovieDetails = ({ selectedId, onClose }) => {
+  return (
+    <div className="details">
+      <button className="btn-back" onClick={onClose}>
+        &larr;
+      </button>
+      {selectedId}
+    </div>
+  );
 };
 
 const Loader = () => {
