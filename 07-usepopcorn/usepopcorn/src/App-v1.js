@@ -1,5 +1,6 @@
 import { Children, useEffect, useState } from "react";
-import StarRating from "./StarRating";
+// import StarRating from "./StarRating";
+import StarRating2 from "./StarRating2";
 
 const tempMovieData = [
   {
@@ -135,6 +136,7 @@ export default function App() {
 const MovieDetails = ({ selectedId, onClose }) => {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
 
   const {
     Title: title,
@@ -143,7 +145,7 @@ const MovieDetails = ({ selectedId, onClose }) => {
     Runtime: runtime,
     imdbRating,
     Plot: plot,
-    Release: release,
+    Released: released,
     Actors: actors,
     Director: director,
     Genre: genre,
@@ -178,7 +180,7 @@ const MovieDetails = ({ selectedId, onClose }) => {
             <div className="details-overview">
               <h2>{title}</h2>
               <p>
-                {release} &bull; {runtime}
+                {released} &bull; {runtime}
               </p>
               <p>{genre}</p>
               <p>
@@ -188,7 +190,13 @@ const MovieDetails = ({ selectedId, onClose }) => {
             </div>
           </header>
           <section>
-            <StarRating maxRating={10} size={24} />
+            <div className="rating">
+              <StarRating2
+                maxRating={10}
+                size={24}
+                onSetRating={setUserRating}
+              />
+            </div>
             <p>
               <em>{plot}</em>
             </p>
