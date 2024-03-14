@@ -56,7 +56,7 @@ const average = (arr) =>
 const KEY = "8db107a9";
 
 export default function App() {
-  const [query, setQueries] = useState("inception");
+  const [query, setQueries] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -116,6 +116,7 @@ export default function App() {
       setError("");
       return;
     }
+    handleCloseMovie();
     fetchMovies();
 
     return () => {
@@ -219,6 +220,18 @@ const MovieDetails = ({ selectedId, onClose, onAddWatchMovie, watched }) => {
     getMovieDetail();
   }, [selectedId]);
 
+  useEffect(() => {
+    const callBack = (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", callBack);
+
+    return () => {
+      document.removeEventListener("keydown", callBack);
+    };
+  }, [onClose]);
   return (
     <div className="details">
       {isLoading ? (
