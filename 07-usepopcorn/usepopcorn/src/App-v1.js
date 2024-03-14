@@ -80,6 +80,7 @@ export default function App() {
       watched.filter((movie) => movie.imdbID !== selectedId)
     );
   };
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -186,6 +187,11 @@ const MovieDetails = ({ selectedId, onClose, onAddWatchMovie, watched }) => {
     onAddWatchMovie(newWatchedMovie);
     onClose();
   };
+
+  useEffect(() => {
+    if (!title) return;
+    document.title = `Movie | ${title}`;
+  }, [title]);
 
   useEffect(() => {
     const getMovieDetail = async () => {
