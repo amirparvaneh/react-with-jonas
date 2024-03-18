@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StarRating2 from "./StarRating2";
 
 const average = (arr) =>
@@ -12,11 +12,11 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  //const [watched, setWatched] = useState([]);
-  const [watched, setWatched] = useState(() => {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue);
-  });
+  const [watched, setWatched] = useState([]);
+  // const [watched, setWatched] = useState(() => {
+  //   const storedValue = localStorage.getItem("watched");
+  //   return JSON.parse(storedValue);
+  // });
 
   const handleSelectMovie = (id) => {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
@@ -36,9 +36,9 @@ export default function App() {
     );
   };
 
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify(watched));
-  }, [watched]);
+  // useEffect(() => {
+  //   localStorage.setItem("watched", JSON.stringify(watched));
+  // }, [watched]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -287,6 +287,21 @@ const NavBar = ({ children }) => {
 };
 
 const Search = ({ query, onSetQuery }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const callBack = (e) => {
+      if (document.activeElement === inputRef.current) return;
+      if (e.code === "Enter") {
+        inputRef.current.focus();
+        onSetQuery("");
+      }
+    };
+
+    document.addEventListener("keydown", callBack);
+    return () => document.addEventListener("keydown", callBack);
+  }, [onSetQuery]);
+
   return (
     <input
       className="search"
@@ -294,6 +309,7 @@ const Search = ({ query, onSetQuery }) => {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => onSetQuery(e.target.value)}
+      ref={inputRef}
     />
   );
 };
