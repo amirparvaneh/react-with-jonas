@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 // import StarRating from "./StartRating";
-import App from "./App-v2";
+import App from "./App-v3";
 import "./index.css";
 // import App from "./App";
 
