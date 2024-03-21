@@ -1,5 +1,4 @@
 import { useEffect, useReducer } from "react";
-import DateCounter from "./DateCounter";
 import Header from "./Header";
 import Main from "./Main";
 import Loader from "./Loader";
@@ -10,6 +9,7 @@ import Questions from "./Questions";
 const initialState = {
   questions: [],
   status: "loading",
+  index: 0,
 };
 
 const reducer = (state, action) => {
@@ -36,7 +36,10 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useEffect(() => {
     fetch("http://localhost:9000/questions")
@@ -53,7 +56,7 @@ const App = () => {
         {status === "ready" && (
           <StartScreen questionsCount={questions.length} dispatch={dispatch} />
         )}
-        {status === "active" && <Questions />}
+        {status === "active" && <Questions question={questions[index]} />}
       </Main>
     </div>
   );
