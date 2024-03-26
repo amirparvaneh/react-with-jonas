@@ -6,16 +6,22 @@ import {
   Marker,
   Popup,
   useMap,
-  useMapEvent,
   useMapEvents,
 } from "react-leaflet";
 import { useEffect, useState } from "react";
 import { useCities } from "../context/CitiesContext";
+import { useGeolocation } from "../hooks/useGeoloaction";
+import Button from "../components/Button";
 
 const Map = () => {
   const { cities } = useCities();
   const [searchParam] = useSearchParams();
   const [mapPosition, setMapPosition] = useState([40, 0]);
+  const {
+    isLoading: isLoadingPostion,
+    position: geoLocationPosition,
+    getPosition,
+  } = useGeolocation();
 
   const mapLat = searchParam.get("lat");
   const mapLng = searchParam.get("lng");
@@ -24,8 +30,18 @@ const Map = () => {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
   }, [mapLat, mapLng]);
 
+  useEffect(() => {
+    if (geoLocationPosition)
+      setMapPosition([geoLocationPosition.lat, geoLocationPosition.lng]);
+  }, [geoLocationPosition]);
+
   return (
     <div className={styles.mapContainer}>
+      {geoLocationPosition && (
+        <Button type="position" onClick={getPosition}>
+          {isLoadingPostion ? "Loading..." : "Use your local position"}
+        </Button>
+      )}
       <MapContainer
         center={mapPosition}
         zoom={6}
