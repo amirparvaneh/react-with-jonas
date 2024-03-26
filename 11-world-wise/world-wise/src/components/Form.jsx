@@ -21,6 +21,7 @@ export function convertToEmoji(countryCode) {
 
 function Form() {
   const [lat, lng] = useUrlPosition();
+  console.log(lat);
   const [isLoadingGeocoding, setIsLoadingGeoCoding] = useState(false);
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
@@ -36,11 +37,9 @@ function Form() {
       try {
         setIsLoadingGeoCoding(true);
         setGeoCodingError("");
-        const res = await fetch(
-          `${BASE_URL}?latitude=${lat}&langtitude=${lng}`
-        );
+        const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
         const data = await res.json();
-        // console.log(data);
+        console.log(data);
 
         if (!data.countryCode)
           throw new Error(
