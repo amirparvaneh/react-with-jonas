@@ -37,27 +37,36 @@
       "id": "98443197"
     },
     {
-      "id": "e180",
-      "cityName": "Wamba",
-      "country": "Spain",
-      "notes": "gfsdgd",
-      "emoji": "🇪🇸",
-      "date": "2024-02-29T07:47:35.000Z",
+      "id": "f3dd",
+      "cityName": "Nefiach",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2024-03-27T08:17:13.979Z",
       "position": {
-        "lat": "41.70732865702842",
-        "lng": "-4.899902343750001"
+        "lat": "42.68412799904818",
+        "lng": "2.6806640625"
       }
     },
     {
-      "id": "ad49",
-      "cityName": "Fonni",
-      "country": "Italy",
-      "notes": "Itallllyyyyy",
-      "emoji": "🇮🇹",
-      "date": "2024-01-28T07:51:48.000Z",
+      "id": "a94e",
+      "cityName": "Hassleholm",
+      "country": "Sweden",
+      "emoji": "🇸🇪",
+      "date": "2024-03-27T08:17:22.132Z",
       "position": {
-        "lat": "40.06430997680276",
-        "lng": "9.294433593750002"
+        "lat": "56.15888727476656",
+        "lng": "13.996582031250002"
+      }
+    },
+    {
+      "id": "1e19",
+      "cityName": "Grytdalen",
+      "country": "Norway",
+      "emoji": "🇳🇴",
+      "date": "2024-03-27T08:17:25.743Z",
+      "position": {
+        "lat": "59.244044190355474",
+        "lng": "8.635253906250002"
       }
     }
   ]
