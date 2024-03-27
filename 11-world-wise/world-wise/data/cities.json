@@ -13,18 +13,6 @@
       "id": "73930385"
     },
     {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": "17806751"
-    },
-    {
       "cityName": "Berlin",
       "country": "Germany",
       "emoji": "🇩🇪",
@@ -35,17 +23,6 @@
         "lng": 13.376933665713324
       },
       "id": "98443197"
-    },
-    {
-      "id": "f3dd",
-      "cityName": "Nefiach",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2024-03-27T08:17:13.979Z",
-      "position": {
-        "lat": "42.68412799904818",
-        "lng": "2.6806640625"
-      }
     },
     {
       "id": "a94e",
@@ -59,14 +36,14 @@
       }
     },
     {
-      "id": "1e19",
-      "cityName": "Grytdalen",
-      "country": "Norway",
-      "emoji": "🇳🇴",
-      "date": "2024-03-27T08:17:25.743Z",
+      "id": "9601",
+      "cityName": "Siikalatva sub-region",
+      "country": "Finland",
+      "emoji": "🇫🇮",
+      "date": "2024-03-27T08:34:07.387Z",
       "position": {
-        "lat": "59.244044190355474",
-        "lng": "8.635253906250002"
+        "lat": "64.25147298342947",
+        "lng": "26.279296875000004"
       }
     }
   ]
