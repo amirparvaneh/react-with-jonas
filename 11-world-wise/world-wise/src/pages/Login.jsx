@@ -12,14 +12,15 @@ export default function Login() {
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
 
-  useEffect(() => {
-    if (isAuthenticate) navigate("/app", { replace: true });
-  }, [isAuthenticate, navigate]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) login(email, password);
   };
+
+  useEffect(() => {
+    if (isAuthenticate) navigate("/app", { replace: true });
+  }, [isAuthenticate, navigate]);
+
   return (
     <main className={styles.login}>
       <PageNav />

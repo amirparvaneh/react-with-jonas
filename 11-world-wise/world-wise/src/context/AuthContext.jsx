@@ -1,5 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 
+const AuthContext = createContext();
+
 const FAKE_USER = {
   name: "Jack",
   email: "jack@example.com",
@@ -30,8 +32,6 @@ const reducer = (state, action) => {
   }
 };
 
-const AuthContext = createContext();
-
 const AuthProvider = ({ children }) => {
   const [{ user, isAuthenticate }, dispatch] = useReducer(
     reducer,
@@ -39,9 +39,8 @@ const AuthProvider = ({ children }) => {
   );
 
   const login = (email, password) => {
-    if (FAKE_USER.email === email && FAKE_USER.password === password) {
+    if (email === FAKE_USER.email && password === FAKE_USER.password)
       dispatch({ type: "login", payload: FAKE_USER });
-    }
   };
 
   const logout = () => {
