@@ -36,7 +36,6 @@ const route = createBrowserRouter([
         path: "/order/new",
         element: <CreateOrder />,
         action: createOrderAction,
-        errorElement: <Error />,
       },
     ],
   },
