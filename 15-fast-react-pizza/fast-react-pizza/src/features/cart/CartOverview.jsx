@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-function CartOverview() {
+const CartOverview=()=> {
   return (
     <div
-      className="bg-stone-800 text-stone-200 
+      className="flex items-center justify-between bg-stone-800 text-stone-200 
     px-4 py-4 sm:px-6 md:text-base"
     >
       <p className="text-stone-300 space-x-4 sm:space-x-6">

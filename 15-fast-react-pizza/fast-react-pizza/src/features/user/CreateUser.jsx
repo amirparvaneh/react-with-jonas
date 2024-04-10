@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateUser() {
+const CreateUser = () => {
   const [username, setUsername] = useState("");
 
   function handleSubmit(e) {
@@ -28,6 +28,6 @@ function CreateUser() {
       )}
     </form>
   );
-}
+};
 
 export default CreateUser;
