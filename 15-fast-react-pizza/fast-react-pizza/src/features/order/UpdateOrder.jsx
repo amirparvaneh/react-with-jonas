@@ -14,10 +14,10 @@ const UpdateOrder = ({ order }) => {
   );
 };
 
-export const action = async (request, params) => {
+export default UpdateOrder;
+
+export const action = async ({ request, params }) => {
   const data = { priority: true };
   await updateOrder(params.orderId, data);
   return null;
 };
-
-export default UpdateOrder;
